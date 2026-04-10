@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Info - Ved og Skog</title>
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body>
+  <div class="container">
+
+<div class="appUtilityBar">
+  <div class="loggedInMini">
+    Innlogget som: <span id="navUserName">Laster...</span>
+  </div>
+
+  <div class="menuArea">
+    <button
+      id="navMenuToggle"
+      class="menuToggleBtn"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
+      ☰ Meny
+    </button>
+
+    <div id="navMenu" class="appMenu" hidden>
+      <a class="appMenuLink" href="index.html">📝 Registrering</a>
+      <a class="appMenuLink" href="oversikt.html">📊 Oversikt</a>
+      <a class="appMenuLink" href="historikk.html">🕘 Historikk</a>
+      <a class="appMenuLink" href="info.html">ℹ️ Info</a>
+      <button id="navLogoutBtn" class="appMenuLink logoutMenuBtn" type="button">🚪 Logg ut</button>
+    </div>
+  </div>
+</div>
+
+    <header class="topbar">
+      <div class="topbarInner centerHeader">
+        <div class="topbarLeft">
+          <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo" />
+          <p>Slik fører du timer, kilometer og leveringer</p>
+        </div>
+      </div>
+    </header>
+
+
+    <main class="infoPage">
+      <section class="card heroCard">
+        <div class="heroGrid">
+          <div class="heroText">
+            <div class="heroTagRow">
+              <span class="heroTag">🪵 Registrering uke for uke</span>
+              <span class="heroTag">⚡ Automatisk lagring</span>
+              <span class="heroTag">📊 Oversikt og historikk</span>
+            </div>
+            <h1>Før arbeidsdagen raskt og riktig</h1>
+            <p class="heroLead">
+              Ved og Skog er laget for at du skal kunne føre <strong>timer</strong>, <strong>kilometer</strong>
+              og <strong>leveringer</strong> rett i ukevisningen. Du skriver bare inn tall i riktig celle,
+              og systemet lagrer fortløpende mens du jobber.
+            </p>
+            <div class="heroHint">
+              <span>💡</span>
+              <span>Det viktigste å huske: velg riktig <strong>bruker</strong>, stå på riktig <strong>uke</strong>, og skriv verdien i riktig <strong>rad</strong> og <strong>dag</strong>.</span>
+            </div>
+          </div>
+
+          <div class="heroIllustration">
+            <div class="mockWindow">
+              <div class="mockHeader">
+                <div class="mockDots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="mockBadge">Ukevisning</div>
+              </div>
+
+              <div class="miniTable">
+                <div class="miniRow">
+                  <div class="miniHead">Kategori</div>
+                  <div class="miniHead">Man</div>
+                  <div class="miniHead">Tir</div>
+                  <div class="miniHead hideSmall">Ons</div>
+                  <div class="miniHead hideSmall">Tor</div>
+                  <div class="miniHead">Sum</div>
+                </div>
+                <div class="miniRow">
+                  <div class="miniCell category">Ved · timer</div>
+                  <div class="miniCell"></div>
+                  <div class="miniCell value">7.5</div>
+                  <div class="miniCell hideSmall"></div>
+                  <div class="miniCell hideSmall"></div>
+                  <div class="miniCell value">7.5</div>
+                </div>
+                <div class="miniRow">
+                  <div class="miniCell category">Kunde · km</div>
+                  <div class="miniCell"></div>
+                  <div class="miniCell"></div>
+                  <div class="miniCell value hideSmall">42</div>
+                  <div class="miniCell hideSmall"></div>
+                  <div class="miniCell value">42</div>
+                </div>
+                <div class="miniRow">
+                  <div class="miniCell category">Levering · stk</div>
+                  <div class="miniCell"></div>
+                  <div class="miniCell"></div>
+                  <div class="miniCell hideSmall"></div>
+                  <div class="miniCell value hideSmall">3</div>
+                  <div class="miniCell value">3</div>
+                </div>
+              </div>
+
+              <div class="miniSummary">
+                <div class="miniStat"><strong>7.5</strong> timer</div>
+                <div class="miniStat"><strong>42</strong> km</div>
+                <div class="miniStat"><strong>3</strong> stk</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card toneCard">
+        <h2 class="infoSectionTitle">Slik gjør du det i 3 enkle steg</h2>
+        <p class="infoSectionLead">Her er den raske arbeidsflyten de fleste følger hver uke.</p>
+
+        <div class="quickCards">
+          <article class="quickCard">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <rect x="10" y="18" width="100" height="86" rx="18" fill="#fffaf0" stroke="#24533b" stroke-width="4" />
+              <rect x="18" y="28" width="84" height="14" rx="7" fill="#d8891c" opacity="0.85" />
+              <circle cx="35" cy="68" r="12" fill="#143b2a" opacity="0.15" />
+              <circle cx="60" cy="68" r="12" fill="#143b2a" opacity="0.15" />
+              <circle cx="85" cy="68" r="12" fill="#143b2a" opacity="0.15" />
+              <rect x="28" y="86" width="64" height="8" rx="4" fill="#24533b" opacity="0.2" />
+            </svg>
+            <h3>1. Velg bruker og uke</h3>
+            <p>Gå til registrering, velg deg selv i <strong>Min bruker</strong>, og bytt uke med <strong>Forrige</strong> og <strong>Neste</strong>.</p>
+          </article>
+
+          <article class="quickCard">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <rect x="12" y="14" width="96" height="92" rx="16" fill="#fffaf0" stroke="#24533b" stroke-width="4" />
+              <rect x="24" y="28" width="72" height="10" rx="5" fill="#24533b" opacity="0.15" />
+              <rect x="24" y="48" width="28" height="16" rx="6" fill="#d8891c" opacity="0.9" />
+              <rect x="58" y="48" width="16" height="16" rx="6" fill="#24533b" opacity="0.16" />
+              <rect x="80" y="48" width="16" height="16" rx="6" fill="#24533b" opacity="0.16" />
+              <rect x="24" y="72" width="16" height="16" rx="6" fill="#24533b" opacity="0.16" />
+              <rect x="46" y="72" width="30" height="16" rx="6" fill="#d8891c" opacity="0.9" />
+              <rect x="82" y="72" width="14" height="16" rx="6" fill="#24533b" opacity="0.16" />
+            </svg>
+            <h3>2. Skriv i riktig celle</h3>
+            <p>Hver rad er en <strong>kategori</strong> og en <strong>enhet</strong>. Før tall for riktig dag direkte i tabellen.</p>
+          </article>
+
+          <article class="quickCard">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <rect x="14" y="18" width="92" height="88" rx="18" fill="#fffaf0" stroke="#24533b" stroke-width="4" />
+              <rect x="28" y="72" width="12" height="20" rx="4" fill="#24533b" opacity="0.35" />
+              <rect x="48" y="58" width="12" height="34" rx="4" fill="#24533b" opacity="0.55" />
+              <rect x="68" y="42" width="12" height="50" rx="4" fill="#d8891c" opacity="0.9" />
+              <polyline points="26,48 46,38 66,46 88,28" fill="none" stroke="#24533b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h3>3. Følg med i oversikt</h3>
+            <p>Bruk oversikt og historikk for å kontrollere summer, filtrere data og se endringer som er gjort.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="splitGuide">
+        <article class="card toneCard">
+          <h2>Føre timer, km og leveringer</h2>
+          <p class="infoSectionLead">Du trenger ikke fylle ut et skjema. Alt skjer direkte i ukevisningen.</p>
+          <div class="statusBanner">Timer skrives som desimaltall (7.5 = 7t 30min). Levering av ved – stk kan føres som hele eller delte lass: 0.333 = 1/3, 0.5 = 1/2, 2.333 = 2 1/3.</div>
+          <ul class="guideList">
+            <li><strong>Timer</strong> skrives som desimaltall, for eksempel <strong>7.5</strong> for 7 timer og 30 minutter.</li>
+            <li><strong>Kilometer</strong> skrives som heltall eller desimaltall, for eksempel <strong>18</strong> eller <strong>18.5</strong>.</li>
+            <li><strong>Leveringer</strong> føres som antall i <strong>stk</strong>, og du kan bruke delte leveringer som <strong>1/3</strong>, <strong>1/2</strong>, <strong>1 1/2</strong> og <strong>2 1/3</strong>.</li>
+            <li>Summen helt til høyre oppdateres automatisk for hver rad.</li>
+          </ul>
+          <div class="statusBanner">⚡ Du trenger ikke trykke på en lagre-knapp. Endringer lagres automatisk mens du skriver.</div>
+        </article>
+
+        <aside class="card accentCard">
+          <h2>Eksempel på inntasting</h2>
+          <p class="infoSectionLead">Tre vanlige eksempler fra en arbeidsuke.</p>
+          <div class="inputExamples">
+            <div class="inputExample">
+              <div>
+                <div class="inputExampleLabel">Jobb med ved – timer</div>
+                <div>Du jobbet 7 timer og 30 minutter på tirsdag.</div>
+              </div>
+              <div class="fakeInput">7.5</div>
+            </div>
+            <div class="inputExample">
+              <div>
+                <div class="inputExampleLabel">Jobb for kunder – km</div>
+                <div>Du kjørte 42 km for kunde på onsdag.</div>
+              </div>
+              <div class="fakeInput">42</div>
+            </div>
+            <div class="inputExample">
+              <div>
+                <div class="inputExampleLabel">Levering av ved – stk / km</div>
+                <div>Du leverte 3 lass og kjørte 16 km samme dag.</div>
+              </div>
+              <div class="fakeInput">3 + 16</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="splitGuide">
+        <article class="card greenCard">
+          <h2>Kategorier i systemet</h2>
+          <p class="infoSectionLead">Velg raden som passer best til arbeidet du har gjort den dagen.</p>
+          <div class="categoryGrid">
+            <div class="categoryItem">
+              <strong>Jobb for kunder</strong>
+              <div class="unitPills">
+                <span class="unitPill">timer</span>
+                <span class="unitPill">km</span>
+              </div>
+            </div>
+            <div class="categoryItem">
+              <strong>Jobb med ved</strong>
+              <div class="unitPills">
+                <span class="unitPill">timer</span>
+                <span class="unitPill">km</span>
+              </div>
+            </div>
+            <div class="categoryItem">
+              <strong>Jobb div</strong>
+              <div class="unitPills">
+                <span class="unitPill">timer</span>
+                <span class="unitPill">km</span>
+              </div>
+            </div>
+            <div class="categoryItem">
+              <strong>Kjøring Molde–Ålesund</strong>
+              <div class="unitPills">
+                <span class="unitPill">km</span>
+              </div>
+            </div>
+            <div class="categoryItem">
+              <strong>Levering av ved</strong>
+              <div class="unitPills">
+                <span class="unitPill">stk – også 1/3 og 1/2</span>
+                <span class="unitPill">km</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="card toneCard">
+          <h2>Endre eller slette</h2>
+          <p class="infoSectionLead">Du gjør endringer direkte i samme celle.</p>
+          <div class="examplePanel">
+            <div class="exampleBox">
+              <strong>Endre verdi</strong>
+              Skriv bare inn ny verdi i cellen. Den gamle posten oppdateres automatisk.
+            </div>
+            <div class="exampleBox">
+              <strong>Slette verdi</strong>
+              Tøm feltet eller sett verdien til <strong>0</strong>. Da forsvinner posten fra aktiv oversikt.
+            </div>
+            <div class="exampleBox">
+              <strong>Bytte uke eller bruker</strong>
+              Pågående endringer blir lagret før du bytter visning.
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="dualCards">
+  <article class="card toneCard">
+    <div class="panelTitle">
+      <span class="panelIcon">📊</span>
+      <div>
+        <h2>Oversikt</h2>
+      </div>
+    </div>
+    <p class="infoSectionLead">Bruk oversikten når du vil kontrollere data, filtrere og få raske totalsummer.</p>
+    <ul class="guideList">
+      <li>Filtrer på <strong>person</strong>, <strong>år</strong>, <strong>måned</strong> og <strong>kategori</strong>.</li>
+      <li>Oversikten husker sist brukte filter, så du slipper å velge alt på nytt hver gang.</li>
+      <li>Øverst ser du <strong>nøkkeltall</strong> for <strong>timer</strong>, <strong>km</strong> og <strong>leveringer</strong>.</li>
+      <li>Klikk på en dag i kalenderen for å vise registreringene bare for den dagen.</li>
+      <li>Klikk på en registrering for å se detaljer.</li>
+      <li>Bruk <strong>Marker</strong> hvis du vil velge flere poster og slette dem samlet.</li>
+      <li>Se <strong>summer per kategori</strong> og <strong>månedlig oversikt</strong> lenger ned på siden.</li>
+    </ul>
+  </article>
+
+  <article class="card accentCard">
+    <div class="panelTitle">
+      <span class="panelIcon">🕘</span>
+      <div>
+        <h2>Historikk</h2>
+      </div>
+    </div>
+    <p class="infoSectionLead">Historikk-siden viser hva som er blitt gjort i systemet, og gjør det lett å finne tilbake til endringer.</p>
+    <p class="mutedNote">Historikken viser de siste <strong>500 endringene</strong>, fordelt på <strong>50 per side</strong>. Siden husker også sist brukte filtre og søk.</p>
+    <ul class="guideList">
+      <li>Se hvem som har <strong>opprettet</strong>, <strong>endret</strong>, <strong>slettet</strong> eller <strong>gjenopprettet</strong> en post.</li>
+      <li>Filtrer på <strong>person</strong> og <strong>handling</strong>.</li>
+      <li>Bruk <strong>søk</strong> for å finne igjen poster på <strong>kategori</strong> eller <strong>dato</strong>.</li>
+      <li>Trykk på en rad for å åpne mer informasjon om handlingen.</li>
+      <li>Hvis en post er slettet, kan du <strong>gjenopprette</strong> den direkte fra historikken når det trengs.</li>
+      <li>Trykk <strong>Oppdater</strong> for å hente siste historikk.</li>
+    </ul>
+  </article>
+</section>
+
+      <section class="card greenCard">
+        <h2>Farger i kalenderen</h2>
+        <p class="infoSectionLead">Kalenderen i oversikten bruker farger for å vise hvem som har ført registreringer.</p>
+        <div class="calendarLegendGrid">
+          <div class="legendCard"><span class="legendDotLarge tord"></span> Rosa prikk = Tord</div>
+          <div class="legendCard"><span class="legendDotLarge tobias"></span> Blå prikk = Tobias</div>
+          <div class="legendCard"><span class="legendDotLarge johannes"></span> Grønn prikk = Johannes</div>
+          <div class="legendCard"><span class="legendDotLarge all"></span> Oransje markering = alle tre har ført samme dag</div>
+        </div>
+      </section>
+
+      <section class="tipBanner">
+        <div class="tipBadge">🌲</div>
+        <div>
+          <h2 style="margin: 0 0 8px;">Gode vaner som gjør føringen enklere</h2>
+          <ul class="tipList">
+            <li>Sjekk alltid at du står på riktig bruker før du begynner å føre.</li>
+            <li>Bruk timer som desimaltall, ikke med kolon.</li>
+            <li>Før både <strong>stk</strong> og <strong>km</strong> når du registrerer levering av ved hvis begge deler skal med.</li>
+            <li>Bruk oversikten for å kontrollere nøkkeltall, totalsummer og registreringer før fakturering eller oppsummering.</li>
+          </ul>
+          <p class="mutedNote">Denne infosiden er laget som en rask bruksanvisning. Den skal være enkel å skumme, men også konkret nok til at nye brukere skjønner systemet med én gang.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="nav.js"></script>
+</body>
+</html>

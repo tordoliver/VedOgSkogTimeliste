@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ved og Skog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="authGate" class="authGate">
+    <div class="authCard">
+      <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo" />
+      <h1>Logg inn</h1>
+      <p class="authLead">Bruk e-post og passord for å åpne systemet.</p>
+
+      <form id="loginForm" class="authForm">
+        <label for="loginEmail">E-post</label>
+        <input id="loginEmail" type="email" autocomplete="username" required />
+
+        <label for="loginPassword">Passord</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required />
+
+        <button type="submit">Logg inn</button>
+        <p id="loginMessage" class="authMessage"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="appShell" class="container" hidden>
+
+<div class="appUtilityBar">
+  <div class="loggedInMini">
+    Innlogget som: <span id="navUserName">Laster...</span>
+  </div>
+
+  <div class="menuArea">
+    <button
+      id="navMenuToggle"
+      class="menuToggleBtn"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
+      ☰ Meny
+    </button>
+
+    <div id="navMenu" class="appMenu" hidden>
+      <a class="appMenuLink" href="index.html">📝 Registrering</a>
+      <a class="appMenuLink" href="oversikt.html">📊 Oversikt</a>
+      <a class="appMenuLink" href="historikk.html">🕘 Historikk</a>
+      <a class="appMenuLink" href="info.html">ℹ️ Info</a>
+      <button id="navLogoutBtn" class="appMenuLink logoutMenuBtn" type="button">🚪 Logg ut</button>
+    </div>
+  </div>
+</div>
+
+    <header class="topbar">
+      <div class="topbarInner centerHeader">
+        <div class="topbarLeft">
+          <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo" />
+          <p>Timer, kilometer og leveringer</p>
+        </div>
+      </div>
+    </header>
+
+
+    <main class="pageMain">
+      <section class="card main-card">
+        <div class="sectionHeader weekHeaderTop">
+          <div>
+            <h2>Ukevisning</h2>
+            <div id="weekLabel" class="weekLabel"></div>
+          </div>
+
+          <div class="weekHeaderActions">
+            <button id="prevWeekBtn" class="secondary" type="button">Forrige</button>
+            <button id="nextWeekBtn" class="secondary" type="button">Neste</button>
+          </div>
+        </div>
+
+        <div id="loggedInUserBox" class="hidden" aria-hidden="true"></div>
+
+        <section class="mobileWeekView" id="mobileWeekView" aria-label="Mobilvisning av uke">
+          <div class="mobileWeekIntro">
+            <strong>Mobilvisning</strong>
+          </div>
+
+          <div id="mobileDayPicker" class="mobileDayPicker"></div>
+          <div id="mobileSelectedDayInfo" class="mobileSelectedDayInfo"></div>
+          <div id="mobileWeekCards" class="mobileWeekCards"></div>
+        </section>
+
+        <div class="tableWrapper">
+          <table class="weekTable">
+            <thead>
+              <tr>
+                <th>Kategori</th>
+                <th>Man</th>
+                <th>Tir</th>
+                <th>Ons</th>
+                <th>Tor</th>
+                <th>Fre</th>
+                <th>Lør</th>
+                <th>Søn</th>
+                <th>Sum</th>
+              </tr>
+            </thead>
+            <tbody id="weekTableBody"></tbody>
+          </table>
+        </div>
+
+        <div id="weekHelperText" class="weekHelperText"></div>
+
+        <div class="ctaRow">
+          <button id="resetWeekBtn" class="secondary" type="button">Til denne uka</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="app.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>

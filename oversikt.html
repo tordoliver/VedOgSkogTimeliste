@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oversikt - Ved og Skog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+<div class="appUtilityBar">
+  <div class="loggedInMini">
+    Innlogget som: <span id="navUserName">Laster...</span>
+  </div>
+
+  <div class="menuArea">
+    <button
+      id="navMenuToggle"
+      class="menuToggleBtn"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
+      ☰ Meny
+    </button>
+
+    <div id="navMenu" class="appMenu" hidden>
+      <a class="appMenuLink" href="index.html">📝 Registrering</a>
+      <a class="appMenuLink" href="oversikt.html">📊 Oversikt</a>
+      <a class="appMenuLink" href="historikk.html">🕘 Historikk</a>
+      <a class="appMenuLink" href="info.html">ℹ️ Info</a>
+      <button id="navLogoutBtn" class="appMenuLink logoutMenuBtn" type="button">🚪 Logg ut</button>
+    </div>
+  </div>
+</div>
+
+    <header class="topbar">
+      <div class="topbarInner">
+        <div class="topbarLeft">
+          <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo">
+          <p>Oversikt, historikk og kalender</p>
+        </div>
+      </div>
+    </header>
+
+
+    <section class="card">
+      <h2>Filter</h2>
+
+      <div class="filters">
+        <div>
+          <label for="filterPerson">Person</label>
+          <select id="filterPerson">
+            <option value="Alle">Alle</option>
+            <option value="Tord">Tord</option>
+            <option value="Tobias">Tobias</option>
+            <option value="Johannes">Johannes</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filterYear">År</label>
+          <select id="filterYear">
+            <option value="Alle">Alle</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filterMonth">Måned</label>
+          <select id="filterMonth">
+            <option value="Alle">Alle</option>
+            <option value="01">Januar</option>
+            <option value="02">Februar</option>
+            <option value="03">Mars</option>
+            <option value="04">April</option>
+            <option value="05">Mai</option>
+            <option value="06">Juni</option>
+            <option value="07">Juli</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">Oktober</option>
+            <option value="11">November</option>
+            <option value="12">Desember</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filterKategori">Kategori</label>
+          <select id="filterKategori">
+            <option value="Alle">Alle</option>
+            <option value="Jobb for kunder">Jobb for kunder</option>
+            <option value="Jobb med ved">Jobb med ved</option>
+            <option value="Jobb div">Jobb div</option>
+            <option value="Kjøring Molde-Ålesund">Kjøring Molde-Ålesund</option>
+            <option value="Levering av ved">Levering av ved</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttonRow singleTop">
+        <button id="applyFiltersBtn">Oppdater oversikt</button>
+      </div>
+    </section>
+
+<section class="card">
+  <h2 id="overviewKpiTitle">Nøkkeltall</h2>
+  <div id="overviewKpis" class="overviewKpiGrid"></div>
+</section>
+
+    <section class="card">
+      <div class="calendarHeader">
+        <h2>Kalender</h2>
+        <div class="calendarNav">
+          <button type="button" id="prevMonthBtn" class="secondary">Forrige</button>
+          <div id="calendarMonthLabel" class="calendarMonthLabel"></div>
+          <button type="button" id="nextMonthBtn" class="secondary">Neste</button>
+        </div>
+      </div>
+
+      <div class="calendarLegend">
+        <span><span class="legendDot tord"></span> Tord</span>
+        <span><span class="legendDot tobias"></span> Tobias</span>
+        <span><span class="legendDot johannes"></span> Johannes</span>
+        <span><span class="legendDot all-logged"></span> Alle tre samme dag</span>
+      </div>
+
+      <div class="calendarGrid" id="calendarGrid"></div>
+    </section>
+
+    <section class="card">
+      <h2 id="registreringerTitle">Registreringer</h2>
+
+      <div class="entriesToolbar compactToolbar">
+        <button id="toggleSelectModeBtn" type="button" class="secondary">Marker</button>
+        <span id="selectedCount">0 valgt</span>
+        <button id="clearSelectionBtn" type="button" class="secondary hidden">Nullstill</button>
+        <button id="bulkDeleteBtn" type="button" class="delete-btn hidden">Slett</button>
+      </div>
+
+      <div id="entriesList"></div>
+      <div id="entriesPagination" class="entriesPagination"></div>
+    </section>
+
+    <section class="card">
+      <h2 id="summaryTitle">Summer per kategori</h2>
+      <div id="summaryCards"></div>
+    </section>
+
+    <section class="card">
+      <h2 id="monthlyTitle">Månedlig oversikt</h2>
+      <div id="monthlySummary"></div>
+    </section>
+  </div>
+
+  <div id="entryModal" class="modalOverlay">
+    <div class="modalCard">
+      <div class="modalHeader">
+        <h3>Registrering</h3>
+        <button type="button" class="modalClose" onclick="closeEntryModal()">✕</button>
+      </div>
+
+      <div id="entryModalBody"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="oversikt.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>

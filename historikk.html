@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historikk - Ved og Skog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+<div class="appUtilityBar">
+  <div class="loggedInMini">
+    Innlogget som: <span id="navUserName">Laster...</span>
+  </div>
+
+  <div class="menuArea">
+    <button
+      id="navMenuToggle"
+      class="menuToggleBtn"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
+      ☰ Meny
+    </button>
+
+    <div id="navMenu" class="appMenu" hidden>
+      <a class="appMenuLink" href="index.html">📝 Registrering</a>
+      <a class="appMenuLink" href="oversikt.html">📊 Oversikt</a>
+      <a class="appMenuLink" href="historikk.html">🕘 Historikk</a>
+      <a class="appMenuLink" href="info.html">ℹ️ Info</a>
+      <button id="navLogoutBtn" class="appMenuLink logoutMenuBtn" type="button">🚪 Logg ut</button>
+    </div>
+  </div>
+</div>
+
+    <header class="topbar">
+      <div class="topbarInner centerHeader">
+        <div class="topbarLeft">
+          <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo" />
+          <p>Historikk over endringer</p>
+        </div>
+      </div>
+    </header>
+
+
+    <section class="card">
+      <div class="sectionHeader">
+        <h2>Historikk</h2>
+        <button id="refreshHistoryBtn" class="secondary" type="button">Oppdater</button>
+      </div>
+
+      <div class="historyFilters">
+        <div>
+          <label for="historyPersonFilter">Person</label>
+          <select id="historyPersonFilter">
+            <option value="Alle">Alle</option>
+            <option value="Tord">Tord</option>
+            <option value="Tobias">Tobias</option>
+            <option value="Johannes">Johannes</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="historyActionFilter">Handling</label>
+          <select id="historyActionFilter">
+            <option value="Alle">Alle</option>
+            <option value="created">Opprettet</option>
+            <option value="updated">Endret</option>
+            <option value="deleted">Slettet</option>
+            <option value="restored">Gjenopprettet</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="historySearchInput">Søk</label>
+          <input
+            id="historySearchInput"
+            type="text"
+            placeholder="Søk kategori eller dato"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div id="historyActivePerson" class="activePersonIndicator"></div>
+
+
+      <div id="historyCount" class="historyCount"></div>
+      <div id="historyList" class="historyList"></div>
+      <div id="historyPagination" class="entriesPagination"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="historikk.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>
