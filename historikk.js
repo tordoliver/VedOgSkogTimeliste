@@ -354,6 +354,7 @@ function createHistoryDetailsHtml(change) {
     { label: "Kategori", value: snapshot.kategori || "-" },
     { label: "Registreringsdato", value: snapshot.dato ? formatDateNorwegian(snapshot.dato) : "-" },
     { label: "Verdi", value: snapshot.enhet ? formatValue(snapshot) : "-" },
+    { label: "Kommentar", value: snapshot.kommentar || "-" },
     { label: "Logget av", value: actor || "-" }
   ];
 

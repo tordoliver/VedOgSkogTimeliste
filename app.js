@@ -28,17 +28,22 @@ const mobileWeekCards = document.getElementById("mobileWeekCards");
 const CATEGORY_CONFIG = [
   { kategori: "Jobb for kunder", enhet: "timer", step: "0.25" },
   { kategori: "Jobb for kunder", enhet: "km", step: "0.1" },
+  { kategori: "Jobb for kunder", enhet: "km med henger", step: "0.1" },
 
   { kategori: "Jobb med ved", enhet: "timer", step: "0.25" },
   { kategori: "Jobb med ved", enhet: "km", step: "0.1" },
+  { kategori: "Jobb med ved", enhet: "km med henger", step: "0.1" },
 
   { kategori: "Jobb div", enhet: "timer", step: "0.25" },
   { kategori: "Jobb div", enhet: "km", step: "0.1" },
+  { kategori: "Jobb div", enhet: "km med henger", step: "0.1" },
 
   { kategori: "Kjøring Molde-Ålesund", enhet: "km", step: "0.1" },
+  { kategori: "Kjøring Molde-Ålesund", enhet: "km med henger", step: "0.1" },
 
   { kategori: "Levering av ved", enhet: "stk", step: String(DELIVERY_SHARE_STEP) },
-  { kategori: "Levering av ved", enhet: "km", step: "0.1" }
+  { kategori: "Levering av ved", enhet: "km", step: "0.1" },
+  { kategori: "Levering av ved", enhet: "km med henger", step: "0.1" }
 ];
 
 let currentDate = new Date();
@@ -468,6 +473,7 @@ function renderMobileWeekView() {
 
     const sumText = formatCellDisplay(sumRow(config.kategori, config.enhet), config.enhet);
     const selectedDateLabel = `${getLongWeekdayLabel(selectedMobileDate)} ${formatDateNorwegian(selectedMobileDate)}`;
+    const existingComment = getWeekComment(config.kategori, config.enhet, selectedMobileDate);
 
     card.innerHTML = `
       <div class="mobileWeekCardHeader">
@@ -477,13 +483,26 @@ function renderMobileWeekView() {
         </div>
         <div class="mobileWeekCardSum">Ukesum: <span class="mobileWeekCardSumValue">${sumText}</span></div>
       </div>
+
       <div class="mobileWeekCardInput">
         <label for="mobile-${entryKey(config.kategori, config.enhet)}">Verdi for valgt dag</label>
+      </div>
+
+      <div class="mobileWeekCommentRow">
+        <button type="button" class="commentBtn secondary mobileCommentBtn ${existingComment ? "has-comment" : ""}">
+          ${existingComment ? "💬 Endre kommentar" : "💬 Legg til kommentar"}
+        </button>
+      </div>
+
+      <div class="mobileWeekCommentPreview ${existingComment ? "" : "hidden"}">
+        ${existingComment || ""}
       </div>
     `;
 
     const inputWrap = card.querySelector(".mobileWeekCardInput");
     const sumValue = card.querySelector(".mobileWeekCardSumValue");
+    const commentBtn = card.querySelector(".mobileCommentBtn");
+    const commentPreview = card.querySelector(".mobileWeekCommentPreview");
 
     const input = createWeekInput(config, selectedMobileDate, () => {
       if (sumValue) {
@@ -494,6 +513,29 @@ function renderMobileWeekView() {
 
     input.id = `mobile-${entryKey(config.kategori, config.enhet)}`;
     inputWrap.appendChild(input);
+
+    commentBtn.addEventListener("click", async () => {
+      const currentComment = getWeekComment(config.kategori, config.enhet, selectedMobileDate);
+
+      const nyKommentar = prompt(
+        `Kommentar for ${config.kategori} (${config.enhet}) ${formatDateNorwegian(selectedMobileDate)}:`,
+        currentComment
+      );
+
+      if (nyKommentar === null) return;
+
+      await saveCommentOnly(config.kategori, config.enhet, selectedMobileDate, nyKommentar);
+
+      const cleaned = nyKommentar.trim();
+      commentBtn.textContent = cleaned ? "💬 Endre kommentar" : "💬 Legg til kommentar";
+      commentBtn.classList.toggle("has-comment", Boolean(cleaned));
+
+      if (commentPreview) {
+        commentPreview.textContent = cleaned;
+        commentPreview.classList.toggle("hidden", !cleaned);
+      }
+    });
+
     mobileWeekCards.appendChild(card);
   });
 }
@@ -511,6 +553,44 @@ function setWeekDataValue(kategori, enhet, dato, value) {
   }
 
   weekData[key][dato] = value;
+}
+
+function getWeekComment(kategori, enhet, dato) {
+  const existing = findExistingEntry(kategori, enhet, dato);
+  return existing?.kommentar || "";
+}
+
+async function saveCommentOnly(kategori, enhet, dato, kommentar) {
+  const existing = findExistingEntry(kategori, enhet, dato);
+
+  if (!existing) {
+    alert("Du må først skrive inn en verdi før du kan lagre kommentar.");
+    return;
+  }
+
+  const cleanedComment = String(kommentar || "").trim();
+
+  const payload = {
+    user_id: existing.user_id,
+    navn: existing.navn,
+    kategori: existing.kategori,
+    dato: existing.dato,
+    mengde: existing.mengde,
+    enhet: existing.enhet,
+    kommentar: cleanedComment,
+    opprettet_av: getCurrentUser(),
+    is_deleted: false
+  };
+
+  try {
+    updateWeekHelperText("Lagrer kommentar...");
+    const updated = await updateEntry(existing, payload, getCurrentUser());
+    upsertCurrentWeekEntry(updated);
+    updateWeekHelperText(`Kommentar lagret ${formatTimeOnly()}`);
+  } catch (error) {
+    console.error(error);
+    updateWeekHelperText(`Feil ved lagring av kommentar: ${error.message}`, true);
+  }
 }
 
 function sumRow(kategori, enhet) {
@@ -572,6 +652,9 @@ function renderWeekTable() {
     currentWeekDates.forEach((dato, index) => {
       const td = document.createElement("td");
 
+      const cellWrap = document.createElement("div");
+      cellWrap.className = "weekCellWrap";
+
       const input = createWeekInput(config, dato, () => {
         const sumCell = tr.querySelector(".weekSumCell");
         if (sumCell) {
@@ -582,11 +665,38 @@ function renderWeekTable() {
         }
       });
 
+      const commentBtn = document.createElement("button");
+      commentBtn.type = "button";
+      commentBtn.className = "commentBtn secondary";
+      commentBtn.textContent = "💬";
+      commentBtn.title = getWeekComment(config.kategori, config.enhet, dato) || "Legg til kommentar";
+
+      commentBtn.addEventListener("click", async () => {
+        const currentComment = getWeekComment(config.kategori, config.enhet, dato);
+        const nyKommentar = prompt(
+          `Kommentar for ${config.kategori} (${config.enhet}) ${formatDateNorwegian(dato)}:`,
+          currentComment
+        );
+
+        if (nyKommentar === null) return;
+
+        await saveCommentOnly(config.kategori, config.enhet, dato, nyKommentar);
+        commentBtn.title = nyKommentar.trim() || "Legg til kommentar";
+        commentBtn.classList.toggle("has-comment", Boolean(nyKommentar.trim()));
+      });
+
+      if (getWeekComment(config.kategori, config.enhet, dato)) {
+        commentBtn.classList.add("has-comment");
+      }
+
+      cellWrap.appendChild(input);
+      cellWrap.appendChild(commentBtn);
+      td.appendChild(cellWrap);
+
       if (index >= 5) {
         td.classList.add("weekend");
       }
 
-      td.appendChild(input);
       tr.appendChild(td);
     });
 

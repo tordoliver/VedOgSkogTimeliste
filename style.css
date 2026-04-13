@@ -2587,3 +2587,652 @@ button.secondary:hover {
     font-size: 12px;
   }
 }
+
+.weekCellWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weekCellWrap input {
+  flex: 1;
+  min-width: 0;
+}
+
+.commentBtn {
+  width: 42px;
+  min-width: 42px;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.commentBtn.has-comment {
+  background: var(--accent);
+  color: #fff;
+}
+
+.weekCellWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weekCellWrap input {
+  flex: 1;
+  min-width: 0;
+}
+
+.commentBtn {
+  width: 42px;
+  min-width: 42px;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.commentBtn.has-comment {
+  background: var(--accent);
+  color: #fff;
+}
+
+.mobileWeekCommentRow {
+  margin-top: 10px;
+}
+
+.mobileCommentBtn {
+  width: 100%;
+  min-width: 0;
+}
+
+.mobileWeekCommentPreview {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff6e8;
+  border: 1px solid rgba(216, 137, 28, 0.22);
+  color: var(--green-dark);
+  font-size: 14px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.comparisonDiffGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.comparisonDiffCard,
+.comparisonPersonCard {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card-soft);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.comparisonDiffCard--accent .comparisonDiffValue,
+.comparisonPersonValue {
+  color: var(--accent);
+}
+
+.comparisonDiffLabel {
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.comparisonDiffValue {
+  color: var(--green-dark);
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.comparisonPersonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.comparisonPersonHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.comparisonPersonHeader h3 {
+  margin: 0;
+}
+
+.comparisonPersonValue {
+  font-size: 20px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.comparisonRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.comparisonRow:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.comparisonRow--total {
+  margin-top: 6px;
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .comparisonDiffGrid,
+  .comparisonPersonGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   INFO PAGE
+========================= */
+
+.infoPage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.heroCard {
+  padding: 18px;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.heroText h1 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.heroLead {
+  margin: 0 0 14px;
+  color: var(--green-mid);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.heroTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.heroHint {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fff3e2;
+  border: 1px solid #ecd4ab;
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--green-dark);
+  line-height: 1.5;
+}
+
+.heroIllustration {
+  display: flex;
+  justify-content: center;
+}
+
+.mockWindow {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 250, 240, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.mockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.mockDots {
+  display: flex;
+  gap: 6px;
+}
+
+.mockDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #d7ccb3;
+  display: block;
+}
+
+.mockBadge {
+  background: rgba(36, 83, 59, 0.08);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.miniTable {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.miniRow {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr) 0.9fr;
+  gap: 6px;
+}
+
+.miniHead,
+.miniCell {
+  border-radius: 10px;
+  padding: 8px 6px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.miniHead {
+  background: rgba(20, 59, 42, 0.08);
+  color: var(--green-dark);
+  font-weight: 800;
+}
+
+.miniCell {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--green-dark);
+}
+
+.miniCell.category {
+  text-align: left;
+  font-weight: 700;
+}
+
+.miniCell.value {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.miniSummary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.miniStat {
+  background: rgba(20, 59, 42, 0.05);
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+  color: var(--green-dark);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.miniStat strong {
+  display: block;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+/* =========================
+   SECTION LAYOUTS
+========================= */
+
+.infoSectionTitle {
+  margin-bottom: 6px;
+}
+
+.infoSectionLead {
+  margin: 0 0 14px;
+  color: var(--green-mid);
+  line-height: 1.5;
+}
+
+.toneCard,
+.accentCard,
+.greenCard {
+  padding: 16px;
+}
+
+.splitInfoSection {
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr;
+  gap: 14px;
+}
+
+.dualCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.quickCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quickCard {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.quickCard svg {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.quickCard h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.quickCard p {
+  margin: 0;
+  color: var(--green-mid);
+  line-height: 1.5;
+}
+
+/* =========================
+   COMMON INFO ELEMENTS
+========================= */
+
+.statusBanner {
+  background: #f5edd8;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--green-dark);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.guideList,
+.tipList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.guideList li,
+.tipList li {
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+
+.exampleStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exampleBox {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  line-height: 1.5;
+  color: var(--green-dark);
+}
+
+.exampleValue {
+  margin-top: 10px;
+  display: inline-flex;
+  min-width: 72px;
+  justify-content: center;
+  align-items: center;
+  background: #fff3e2;
+  color: var(--accent);
+  border: 1px solid #ecd4ab;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.categoryCard {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.categoryCard strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green-dark);
+}
+
+.categoryTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.miniPill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(36, 83, 59, 0.08);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.panelTitle h2 {
+  margin: 0;
+}
+
+.panelIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.mutedNote {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.calendarLegendGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.legendCard {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--green-dark);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legendDotLarge {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.legendDotLarge.tord {
+  background: #f64a8a;
+}
+
+.legendDotLarge.tobias {
+  background: #00bfff;
+}
+
+.legendDotLarge.johannes {
+  background: #50c878;
+}
+
+.legendDotLarge.all {
+  background: var(--all-logged);
+}
+
+.tipBanner {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: linear-gradient(180deg, #f3ead5 0%, #efe6cf 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.tipBadge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #fff3e2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex: 0 0 auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+  .heroGrid,
+  .splitInfoSection,
+  .dualCards {
+    grid-template-columns: 1fr;
+  }
+
+  .quickCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .heroCard,
+  .toneCard,
+  .accentCard,
+  .greenCard,
+  .tipBanner {
+    padding: 14px;
+  }
+
+  .heroText h1 {
+    font-size: 22px;
+  }
+
+  .heroLead,
+  .infoSectionLead,
+  .quickCard p,
+  .exampleBox,
+  .mutedNote,
+  .guideList li,
+  .tipList li {
+    font-size: 14px;
+  }
+
+  .miniRow {
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  }
+
+  .hideSmall {
+    display: none;
+  }
+
+  .miniSummary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .categoryGrid,
+  .calendarLegendGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tipBanner {
+    flex-direction: column;
+  }
+
+  .heroTag {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}

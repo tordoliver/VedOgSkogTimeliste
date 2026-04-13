@@ -3,6 +3,9 @@ const SUPABASE_KEY = "sb_publishable_1u_6ELWHXiN7J1LvG2qLvQ_AI-kojbJ";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const comparisonTitle = document.getElementById("comparisonTitle");
+const personComparison = document.getElementById("personComparison");
+
 const filterPerson = document.getElementById("filterPerson");
 const filterYear = document.getElementById("filterYear");
 const filterMonth = document.getElementById("filterMonth");
@@ -130,6 +133,172 @@ function formatCategoryTotal(value, unit) {
   return `${value} ${unit}`;
 }
 
+function formatCurrency(value) {
+  const rounded = Math.round(Number(value || 0));
+  return `${rounded.toLocaleString("no-NO")} kr`;
+}
+
+function getEntryValueKr(entry) {
+  const amount = Number(entry.mengde || 0);
+
+  if (!amount) return 0;
+
+  if (entry.enhet === "timer") {
+    if (entry.kategori === "Jobb for kunder") return 0;
+    return amount * 250;
+  }
+
+  if (entry.enhet === "km") {
+    if (entry.kategori === "Kjøring Molde-Ålesund") return amount * 1;
+    return amount * 2;
+  }
+
+  if (entry.enhet === "km med henger") {
+    if (entry.kategori === "Kjøring Molde-Ålesund") return amount * 1.5;
+    return amount * 2.5;
+  }
+
+  return 0;
+}
+
+function getComparisonStats(entries) {
+  const people = ["Tord", "Tobias", "Johannes"];
+
+  const stats = people.map((name) => ({
+    name,
+    timer: 0,
+    km: 0,
+    kmMedHenger: 0,
+    moldeAlesundKm: 0,
+    moldeAlesundKmMedHenger: 0,
+    levering: 0,
+    verdi: 0
+  }));
+
+  entries.forEach((entry) => {
+    const person = stats.find((item) => item.name === entry.navn);
+    if (!person) return;
+
+    const amount = Number(entry.mengde || 0);
+
+    if (entry.enhet === "timer") {
+      person.timer += amount;
+    }
+
+    if (entry.enhet === "stk") {
+      person.levering += amount;
+    }
+
+    if (entry.kategori === "Kjøring Molde-Ålesund" && entry.enhet === "km") {
+      person.moldeAlesundKm += amount;
+    } else if (entry.kategori === "Kjøring Molde-Ålesund" && entry.enhet === "km med henger") {
+      person.moldeAlesundKmMedHenger += amount;
+    } else if (entry.enhet === "km") {
+      person.km += amount;
+    } else if (entry.enhet === "km med henger") {
+      person.kmMedHenger += amount;
+    }
+
+    person.verdi += getEntryValueKr(entry);
+  });
+
+  return stats;
+}
+
+function getDiff(values) {
+  const numeric = values.map((value) => Number(value || 0));
+  if (!numeric.length) return 0;
+  return Math.max(...numeric) - Math.min(...numeric);
+}
+
+function renderPersonComparison(entries) {
+  if (!personComparison) return;
+
+  const stats = getComparisonStats(entries);
+
+  const totalKmPerPerson = stats.map((person) =>
+    person.km + person.kmMedHenger + person.moldeAlesundKm + person.moldeAlesundKmMedHenger
+  );
+
+  const diffTimer = getDiff(stats.map((person) => person.timer));
+  const diffKm = getDiff(totalKmPerPerson);
+  const diffLevering = getDiff(stats.map((person) => person.levering));
+  const diffVerdi = getDiff(stats.map((person) => person.verdi));
+
+  personComparison.innerHTML = `
+    <div class="comparisonDiffGrid">
+      <div class="comparisonDiffCard">
+        <div class="comparisonDiffLabel">Differanse timer</div>
+        <div class="comparisonDiffValue">${formatCategoryTotal(diffTimer, "timer")}</div>
+      </div>
+
+      <div class="comparisonDiffCard">
+        <div class="comparisonDiffLabel">Differanse km</div>
+        <div class="comparisonDiffValue">${formatCategoryTotal(diffKm, "km")}</div>
+      </div>
+
+      <div class="comparisonDiffCard">
+        <div class="comparisonDiffLabel">Differanse levering</div>
+        <div class="comparisonDiffValue">${formatCategoryTotal(diffLevering, "stk")}</div>
+      </div>
+
+      <div class="comparisonDiffCard comparisonDiffCard--accent">
+        <div class="comparisonDiffLabel">Differanse verdi</div>
+        <div class="comparisonDiffValue">${formatCurrency(diffVerdi)}</div>
+      </div>
+    </div>
+
+    <div class="comparisonPersonGrid">
+      ${stats.map((person) => `
+        <article class="comparisonPersonCard">
+          <div class="comparisonPersonHeader">
+            <h3>${person.name}</h3>
+            <div class="comparisonPersonValue">${formatCurrency(person.verdi)}</div>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Timer</span>
+            <strong>${formatCategoryTotal(person.timer, "timer")}</strong>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Km</span>
+            <strong>${formatCategoryTotal(person.km, "km")}</strong>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Km med henger</span>
+            <strong>${formatCategoryTotal(person.kmMedHenger, "km med henger")}</strong>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Molde–Ålesund km</span>
+            <strong>${formatCategoryTotal(person.moldeAlesundKm, "km")}</strong>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Molde–Ålesund km med henger</span>
+            <strong>${formatCategoryTotal(person.moldeAlesundKmMedHenger, "km med henger")}</strong>
+          </div>
+
+          <div class="comparisonRow">
+            <span>Levering</span>
+            <strong>${formatCategoryTotal(person.levering, "stk")}</strong>
+          </div>
+
+          <div class="comparisonRow comparisonRow--total">
+            <span>Km totalt</span>
+            <strong>${formatCategoryTotal(
+              person.km + person.kmMedHenger + person.moldeAlesundKm + person.moldeAlesundKmMedHenger,
+              "km"
+            )}</strong>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
 function populateYearFilter(entries) {
   const years = [...new Set(entries.map((entry) => entry.dato.slice(0, 4)))]
     .sort((a, b) => b.localeCompare(a));
@@ -253,13 +422,18 @@ function renderOverviewKpis(entries) {
   const totals = {
     timer: 0,
     km: 0,
-    stk: 0
+    kmMedHenger: 0,
+    stk: 0,
+    verdi: 0
   };
 
   entries.forEach((entry) => {
     if (entry.enhet === "timer") totals.timer += Number(entry.mengde || 0);
     if (entry.enhet === "km") totals.km += Number(entry.mengde || 0);
+    if (entry.enhet === "km med henger") totals.kmMedHenger += Number(entry.mengde || 0);
     if (entry.enhet === "stk") totals.stk += Number(entry.mengde || 0);
+
+    totals.verdi += getEntryValueKr(entry);
   });
 
   const cards = [
@@ -274,9 +448,19 @@ function renderOverviewKpis(entries) {
       icon: "🚗"
     },
     {
+      label: "Km med henger",
+      value: formatCategoryTotal(totals.kmMedHenger, "km med henger"),
+      icon: "🚚"
+    },
+    {
       label: "Leveringer totalt",
       value: formatCategoryTotal(totals.stk, "stk"),
       icon: "🪵"
+    },
+    {
+      label: "Verdi totalt",
+      value: formatCurrency(totals.verdi),
+      icon: "💰"
     }
   ];
 
@@ -697,10 +881,11 @@ function renderAll() {
   const filteredEntries = getFilteredEntries();
 
   updateSectionTitles();
-  renderOverviewKpis(scopeEntries);
+  renderOverviewKpis(filteredEntries);
   renderEntries(scopeEntries);
   renderSummary(scopeEntries);
   renderMonthlySummary(filteredEntries);
+  renderPersonComparison(filteredEntries);
   renderCalendar();
   saveOverviewFilters();
 }
@@ -822,6 +1007,11 @@ function openEntryModal(entry) {
       <div class="modalInfoRow">
         <span>Verdi</span>
         <strong>${formatValue(entry)}</strong>
+      </div>
+
+      <div class="modalInfoRow">
+        <span>Kommentar</span>
+        <strong>${entry.kommentar?.trim() || "-"}</strong>
       </div>
 
       <div class="modalInfoRow">
