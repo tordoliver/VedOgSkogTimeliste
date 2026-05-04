@@ -41,6 +41,8 @@ const CATEGORY_CONFIG = [
   { kategori: "Kjøring Molde-Ålesund", enhet: "km", step: "0.1" },
   { kategori: "Kjøring Molde-Ålesund", enhet: "km med henger", step: "0.1" },
 
+  { kategori: "Kjøring delt", enhet: "timer", step: "0.25" },
+
   { kategori: "Levering av ved", enhet: "stk", step: String(DELIVERY_SHARE_STEP) },
   { kategori: "Levering av ved", enhet: "km", step: "0.1" },
   { kategori: "Levering av ved", enhet: "km med henger", step: "0.1" }
