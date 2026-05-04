@@ -145,6 +145,7 @@ function getEntryValueKr(entry) {
 
   if (entry.enhet === "timer") {
     if (entry.kategori === "Jobb for kunder") return 0;
+    if (entry.kategori === "Kjøring delt") return amount * 125;
     return amount * 250;
   }
 
