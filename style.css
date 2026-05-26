@@ -3236,3 +3236,241 @@ button.secondary:hover {
     padding: 7px 10px;
   }
 }
+/* Lager */
+.inventoryHeroCard h1 {
+  margin: 0 0 8px 0;
+  color: var(--green-dark);
+}
+
+.inventoryLead,
+.sectionLead {
+  margin: 0;
+  color: var(--green-mid);
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.inventoryKpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.inventoryKpiCard {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.inventoryKpiCard span {
+  display: block;
+  color: var(--green-mid);
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.inventoryKpiCard strong {
+  display: block;
+  color: var(--green-dark);
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.inventoryForm,
+.inventoryMovementForm {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.inventoryFormFull {
+  grid-column: 1 / -1;
+}
+
+.inventoryFormActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inventoryFormActions button {
+  max-width: 260px;
+}
+
+.inventoryToolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.inventoryList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.inventoryCard {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.inventoryCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.inventoryCardTop h3 {
+  margin: 8px 0 0 0;
+  line-height: 1.2;
+}
+
+.inventoryCardTop > strong {
+  flex: 0 0 auto;
+  color: var(--green-dark);
+  font-size: 18px;
+  background: rgba(216, 137, 28, 0.14);
+  border: 1px solid rgba(216, 137, 28, 0.16);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.inventoryTypeBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--green-mid);
+}
+
+.inventoryTypeBadge--ved {
+  background: var(--green-dark);
+}
+
+.inventoryTypeBadge--utstyr {
+  background: var(--accent);
+}
+
+.inventoryTypeBadge--annet {
+  background: var(--green-light);
+}
+
+.inventoryCardStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.inventoryCardStats div {
+  background: rgba(20, 59, 42, 0.05);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.inventoryCardStats span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.inventoryCardStats strong {
+  color: var(--green-dark);
+}
+
+.inventoryNote {
+  margin: 8px 0 12px 0;
+  color: var(--green-mid);
+  line-height: 1.4;
+}
+
+.inventoryCardActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.inventoryHistory {
+  display: grid;
+  gap: 8px;
+}
+
+.inventoryHistoryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.inventoryHistoryRow span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.inventoryHistoryRow p {
+  margin: 6px 0 0 0;
+  color: var(--green-mid);
+}
+
+.inventoryHistoryRow > strong {
+  color: var(--green-dark);
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .inventoryKpiGrid,
+  .inventoryList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inventoryForm,
+  .inventoryMovementForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .inventoryKpiGrid,
+  .inventoryList,
+  .inventoryForm,
+  .inventoryMovementForm,
+  .inventoryToolbar,
+  .inventoryCardStats,
+  .inventoryCardActions {
+    grid-template-columns: 1fr;
+  }
+
+  .inventorySectionHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inventoryFormActions button {
+    max-width: none;
+  }
+
+  .inventoryHistoryRow {
+    flex-direction: column;
+  }
+}

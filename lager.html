@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lager - Ved og Skog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="appUtilityBar">
+      <div class="loggedInMini">
+        Innlogget som: <span id="navUserName">Laster...</span>
+      </div>
+
+      <div class="menuArea">
+        <button
+          id="navMenuToggle"
+          class="menuToggleBtn"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          ☰ Meny
+        </button>
+
+        <div id="navMenu" class="appMenu" hidden>
+          <a class="appMenuLink" href="index.html">📝 Registrering</a>
+          <a class="appMenuLink" href="oversikt.html">📊 Oversikt</a>
+          <a class="appMenuLink" href="lager.html">🪵 Lager</a>
+          <a class="appMenuLink" href="historikk.html">🕘 Historikk</a>
+          <a class="appMenuLink" href="info.html">ℹ️ Info</a>
+          <button id="navLogoutBtn" class="appMenuLink logoutMenuBtn" type="button">🚪 Logg ut</button>
+        </div>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div class="topbarInner centerHeader">
+        <div class="topbarLeft">
+          <img src="VedOgSkog_Logo.jpg" alt="Ved og Skog logo" class="logo" />
+          <p>Lagerbeholdning, vedverdi og utstyr</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="pageMain">
+      <section class="card inventoryHeroCard">
+        <div>
+          <h1>Lager</h1>
+          <p class="inventoryLead">
+            Legg inn ved, utstyr og andre varer. Når dere selger, produserer mer eller kjøper nytt utstyr,
+            bruker dere hurtigknappene for å oppdatere lageret. Systemet regner ut verdi automatisk.
+          </p>
+          <p id="storageModeInfo" class="mutedNote"></p>
+        </div>
+      </section>
+
+      <section class="inventoryKpiGrid" aria-label="Lagersummer">
+        <article class="inventoryKpiCard">
+          <span>Total lagerverdi</span>
+          <strong id="inventoryTotalValue">0 kr</strong>
+        </article>
+        <article class="inventoryKpiCard">
+          <span>Verdi ved</span>
+          <strong id="firewoodTotalValue">0 kr</strong>
+        </article>
+        <article class="inventoryKpiCard">
+          <span>Verdi utstyr</span>
+          <strong id="equipmentTotalValue">0 kr</strong>
+        </article>
+        <article class="inventoryKpiCard">
+          <span>Antall lagerlinjer</span>
+          <strong id="inventoryItemCount">0</strong>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="sectionHeader inventorySectionHeader">
+          <div>
+            <h2>Legg til / endre lagerlinje</h2>
+            <p class="sectionLead">Fyll inn navn, type, antall og verdi per enhet. Trykk Lagre for å legge til eller oppdatere.</p>
+          </div>
+          <button id="resetInventoryFormBtn" class="secondary" type="button">Nullstill</button>
+        </div>
+
+        <form id="inventoryItemForm" class="inventoryForm">
+          <input id="inventoryItemId" type="hidden" />
+
+          <div>
+            <label for="inventoryName">Navn</label>
+            <input id="inventoryName" type="text" placeholder="F.eks. 40L sekker bjørk eller Motorsag" required />
+          </div>
+
+          <div>
+            <label for="inventoryType">Type</label>
+            <select id="inventoryType" required>
+              <option value="ved">Ved</option>
+              <option value="utstyr">Utstyr</option>
+              <option value="annet">Annet</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="inventoryUnit">Enhet</label>
+            <input id="inventoryUnit" type="text" placeholder="F.eks. sekk, pall, stk" value="stk" required />
+          </div>
+
+          <div>
+            <label for="inventoryQuantity">Antall</label>
+            <input id="inventoryQuantity" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0" required />
+          </div>
+
+          <div>
+            <label for="inventoryUnitValue">Verdi per enhet / salgspris</label>
+            <input id="inventoryUnitValue" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0" required />
+          </div>
+
+          <div class="inventoryFormFull">
+            <label for="inventoryNote">Notat</label>
+            <input id="inventoryNote" type="text" placeholder="F.eks. tørr, klar for salg, trenger service" />
+          </div>
+
+          <div class="inventoryFormActions inventoryFormFull">
+            <button id="saveInventoryItemBtn" type="submit">Lagre lagerlinje</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="sectionHeader inventorySectionHeader">
+          <div>
+            <h2>Hurtigoppdatering</h2>
+            <p class="sectionLead">Bruk denne når dere selger, produserer mer ved eller kjøper utstyr.</p>
+          </div>
+        </div>
+
+        <form id="inventoryMovementForm" class="inventoryMovementForm">
+          <div>
+            <label for="movementItemId">Lagerlinje</label>
+            <select id="movementItemId" required></select>
+          </div>
+
+          <div>
+            <label for="movementType">Handling</label>
+            <select id="movementType" required>
+              <option value="sell">Solgt / brukt</option>
+              <option value="produce">Produsert mer</option>
+              <option value="buy">Kjøpt inn</option>
+              <option value="adjust">Korrigering</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="movementQuantity">Antall</label>
+            <input id="movementQuantity" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0" required />
+          </div>
+
+          <div class="inventoryFormFull">
+            <label for="movementNote">Notat</label>
+            <input id="movementNote" type="text" placeholder="F.eks. solgt til kunde, produsert i helga, ny kjede" />
+          </div>
+
+          <div class="inventoryFormActions inventoryFormFull">
+            <button type="submit">Oppdater lager</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="sectionHeader inventorySectionHeader">
+          <div>
+            <h2>Lagerbeholdning</h2>
+            <p class="sectionLead">Trykk Endre for å justere en linje direkte.</p>
+          </div>
+          <button id="refreshInventoryBtn" class="secondary" type="button">Oppdater</button>
+        </div>
+
+        <div class="inventoryToolbar">
+          <input id="inventorySearch" type="search" placeholder="Søk i lager" autocomplete="off" />
+          <select id="inventoryTypeFilter">
+            <option value="alle">Alle typer</option>
+            <option value="ved">Ved</option>
+            <option value="utstyr">Utstyr</option>
+            <option value="annet">Annet</option>
+          </select>
+        </div>
+
+        <div id="inventoryList" class="inventoryList"></div>
+      </section>
+
+      <section class="card">
+        <div class="sectionHeader inventorySectionHeader">
+          <div>
+            <h2>Siste endringer</h2>
+            <p class="sectionLead">Logg over salg, produksjon, innkjøp og korrigeringer.</p>
+          </div>
+          <button id="clearLocalHistoryBtn" class="secondary" type="button">Tøm lokal historikk</button>
+        </div>
+        <div id="inventoryHistory" class="inventoryHistory"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lager.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>
